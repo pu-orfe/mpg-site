@@ -6,7 +6,21 @@ window.drupalSettings = window.drupalSettings || {};
 window.Drupal.t = window.Drupal.t || function(str) { return str; };
 window.bodyScrollLock = window.bodyScrollLock || { disableBodyScroll: function() {}, enableBodyScroll: function() {}, clearAllBodyScrollLocks: function() {} };
 window.smartquotes = window.smartquotes || function() {};
-window.AriaAutocomplete = window.AriaAutocomplete || function() {};</script>
+window.AriaAutocomplete = window.AriaAutocomplete || function() {};
+window.Drupal.attachBehaviors = window.Drupal.attachBehaviors || function(context, settings) {
+  context = context || document;
+  settings = settings || window.drupalSettings;
+  for (const k in window.Drupal.behaviors) {
+    if (typeof window.Drupal.behaviors[k].attach === 'function') {
+      try {
+        window.Drupal.behaviors[k].attach(context, settings);
+      } catch (e) { console.error('Error attaching behavior ' + k, e); }
+    }
+  }
+};
+document.addEventListener('DOMContentLoaded', function() {
+  window.Drupal.attachBehaviors(document, window.drupalSettings);
+});</script>
 <meta charset="utf-8"/>
 <meta content="Abstract: Current distribution systems cannot support simultaneous and identical actions of a large number of distributed flexible energy resources reacting to an identical signal. This talk presents a transactive energy market framework when their access to transactions is restricted. A nonlinear pricing structure incentivizes small transactions s" name="description"/>
 <link href="index.html" rel="canonical"/>
@@ -270,18 +284,14 @@ Sherrerd Hall, Charlton Street, Princeton, NJ 08544<br/>
 <script src="../../../profiles/ps/modules/custom/enhanced_date/js/enhanced_date_field_formatter_te79rq.js"></script>
 <script src="../../../profiles/ps/themes/ps_base/js/repeat-dates-enhancer_te79rq.js"></script>
 <script src="../../../profiles/ps/themes/ps_base/js/structured-node_te79rq.js"></script>
-
-
 <script src="../../../profiles/ps/modules/custom/ps_core/js/utils_te79rq.js"></script>
 <script src="../../../profiles/ps/modules/custom/ps_core/js/columns_te79rq.js"></script>
 <script src="../../../profiles/ps/modules/custom/ps_core/js/tables_te79rq.js"></script>
 <script src="../../../profiles/ps/modules/custom/ps_core/js/content_list_a11y_enhancer_te79rq.js"></script>
 <script src="../../../profiles/ps/modules/custom/ps_core/js/content_list_ajax_te79rq.js"></script>
 <script src="../../../profiles/ps/modules/custom/ps_core/js/enhanced-focus_te79rq.js"></script>
-
 <script src="../../../profiles/ps/modules/custom/ps_core/js/link_behavior_te79rq.js"></script>
 <script src="../../../profiles/ps/modules/custom/ps_core/js/logout-link-username_te79rq.js"></script>
-
 <script src="../../../profiles/ps/modules/custom/ps_events/js/events_poster_modal_te79rq.js"></script>
 <script src="../../../profiles/ps/themes/ps_tiger/js/header_te79rq.js"></script>
 <script src="../../../profiles/ps/themes/ps_tiger/js/image-no-border_te79rq.js"></script>
